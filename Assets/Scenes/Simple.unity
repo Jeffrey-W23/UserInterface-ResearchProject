@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 490947718}
   - component: {fileID: 490947720}
   - component: {fileID: 490947721}
+  - component: {fileID: 490947722}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -430,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490947717}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.273, y: 1.138, z: -9.971}
+  m_LocalPosition: {x: -2.259, y: 2.16, z: -9.971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -474,18 +475,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e70d01b0a8e2c04587e841fc54af3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bSingleUse: 0
-  m_tmBtnVisual: {fileID: 102135054861482192, guid: adaa98cd5531af04096f225dc20853fe,
+  m_bSingleUse: 1
+  m_tmBtnVisual: {fileID: 6055883111074430334, guid: 7bbabac44de266d42a6ec86c8b302c2b,
     type: 3}
   m_bInteractAudio: 0
   m_acInteractAudio: {fileID: 0}
   m_nInventorySize: 6
-  m_sOpenImage: {fileID: 21300000, guid: 8d724d8a66f39704daa6934722eeb562, type: 3}
-  m_sClosedImage: {fileID: 21300000, guid: 1555dfb8bbe0dab41bba347fe94329e1, type: 3}
-  itemsToAdd: []
+  m_sOpenImage: {fileID: 21300000, guid: 4499cccc49b9d3049b6d1cf45295f955, type: 3}
+  m_sClosedImage: {fileID: 21300000, guid: 8d724d8a66f39704daa6934722eeb562, type: 3}
+  itemsToAdd:
+  - {fileID: 11400000, guid: 709c12a8e31b09e4f9a53f90e2d27d25, type: 2}
+  - {fileID: 11400000, guid: 709c12a8e31b09e4f9a53f90e2d27d25, type: 2}
+  - {fileID: 11400000, guid: 709c12a8e31b09e4f9a53f90e2d27d25, type: 2}
+  - {fileID: 11400000, guid: 709c12a8e31b09e4f9a53f90e2d27d25, type: 2}
+  - {fileID: 11400000, guid: 709c12a8e31b09e4f9a53f90e2d27d25, type: 2}
   ItemText1: {fileID: 943330997}
   m_fTimer: 0
   m_fHealth: 5
+--- !u!61 &490947722
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490947717}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.32}
+  m_EdgeRadius: 0
 --- !u!1001 &645252016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -813,7 +845,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20 Pistol Ammo obtained, added to inventory!
+  m_Text: 5 Pistol Ammo obtained, added to inventory!
 --- !u!222 &943331000
 CanvasRenderer:
   m_ObjectHideFlags: 0
