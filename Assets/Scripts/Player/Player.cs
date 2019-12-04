@@ -125,6 +125,9 @@ public class Player : MonoBehaviour
 
     //
     public GameObject m_gFistDisplay;
+
+    //
+    public Inventory m_oArmourInventory;
     // REMOVE // TEMP // REMOVE // POSSIBLTY //
 
     //--------------------------------------------------------------------------------------
@@ -149,6 +152,8 @@ public class Player : MonoBehaviour
         m_gPistol = Instantiate(m_gWeaponPrefab);
         m_gPistol.transform.parent = m_gArm.transform;
         m_gPistol.SetActive(false);
+
+        m_oArmourInventory = new Inventory(2);
         // REMOVE // TEMP // REMOVE // POSSIBLTY //
     }
 
@@ -196,9 +201,15 @@ public class Player : MonoBehaviour
             {
                 // if the hotbar selector has the gun pistol currently selected turn the object on and off
                 if (FindObjectOfType<HotbarSelector>().GetCurrentlySelectedItemStack().GetItem().m_strTitle == "Pistol")
+                {
                     m_gPistol.SetActive(true);
+                    CustomCursor.m_gInstance.SetCrosshair();
+                }
                 else
+                {
                     m_gPistol.SetActive(false);
+                    CustomCursor.m_gInstance.SetDefaultCursor();
+                }
             }
 
             // else if the currently selected item is null or the hotbar selector is null 
@@ -206,6 +217,7 @@ public class Player : MonoBehaviour
             {
                 // set the pistol to unactive
                 m_gPistol.SetActive(false);
+                CustomCursor.m_gInstance.SetDefaultCursor();
             }
         }
 

@@ -176,7 +176,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         }
 
         // if the mouse is middle clicked
-        if (eventData.pointerId == -3)
+        if (eventData.pointerId == -3 && !m_gInventoryManger.m_bHasHotbar)
         {
             // run the middle click method
             OnMiddleClick(oCurrentSelectedStack, oCurrentStackCopy);

@@ -41,6 +41,13 @@ public class PlayerContainer : Container
                 // build the inventory slots
                 AddSlot(oPlayerInventory, i, m_gPrefab.GetComponentInChildren<Transform>().Find("Hotbar Inventory").transform);
             }
+
+            // loop through each slot
+            for (int i = 0; i < 2; i++)
+            {
+                // build the inventory slots
+                AddSlot(InventoryManager.m_gInstance.m_gPlayer.m_oArmourInventory, i, m_gPrefab.GetComponentInChildren<Transform>().Find("Armour Inventory").transform);
+            }
         }
 
         // else if there is no hotbar
@@ -48,6 +55,7 @@ public class PlayerContainer : Container
         {
             // disabled the background image for the hotbar area
             m_gPrefab.GetComponentInChildren<Transform>().Find("Hotbar Inventory").GetComponent<Image>().enabled = false;
+            m_gPrefab.GetComponentInChildren<Transform>().Find("Armour Inventory").GetComponent<Image>().enabled = false;
         }
     }
 

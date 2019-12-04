@@ -10,11 +10,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
 // Chest object. Inheriting from Interactable.
 //--------------------------------------------------------------------------------------
-public class Chest : Interactable
+public class EnemyComplex : Interactable
 {
     // INVENTORY //
     //--------------------------------------------------------------------------------------
@@ -22,7 +23,8 @@ public class Chest : Interactable
     [Header("Inventory Settings:")]
 
     // public int for the inventory size
-    [LabelOverride("Size")] [Tooltip("The size of the Inventory in the chest object.")]
+    [LabelOverride("Size")]
+    [Tooltip("The size of the Inventory in the chest object.")]
     public int m_nInventorySize = 6;
 
     // Leave a space in the inspector.
@@ -35,11 +37,13 @@ public class Chest : Interactable
     [Header("Sprite Settings:")]
 
     //
-    [LabelOverride("Chest Open Image")] [Tooltip("The image to set the chest object sprite when the chest is open.")]
+    [LabelOverride("Chest Open Image")]
+    [Tooltip("The image to set the chest object sprite when the chest is open.")]
     public Sprite m_sOpenImage;
 
     //
-    [LabelOverride("Chest Closed Image")] [Tooltip("The image to set the chest object sprite when the chest is closed.")]
+    [LabelOverride("Chest Closed Image")]
+    [Tooltip("The image to set the chest object sprite when the chest is closed.")]
     public Sprite m_sClosedImage;
 
     // Leave a space in the inspector.
@@ -62,6 +66,9 @@ public class Chest : Interactable
     // REMOVE // TEMP // REMOVE // POSSIBLTY //
     // an array to add some items to the inventory
     public Item[] itemsToAdd;
+    public float m_fHealth = 0.08f;
+    public Transform m_tHealthBar;
+    public GameObject m_fHealthBarBack;
     // REMOVE // TEMP // REMOVE // POSSIBLTY //
 
     //--------------------------------------------------------------------------------------
@@ -74,6 +81,9 @@ public class Chest : Interactable
 
         // Run the base awake
         base.Awake();
+
+        // set interactable to true to stop intial interaction
+        m_bHoldInteraction = true;
     }
 
     //--------------------------------------------------------------------------------------
@@ -105,9 +115,26 @@ public class Chest : Interactable
             // turn off interaction and set chest to closed
             m_bInteracted = false;
             m_bInteractable = false;
+        }
 
-            // set the closed chest image
-            gameObject.GetComponent<SpriteRenderer>().sprite = m_sClosedImage;
+        //
+        m_tHealthBar.gameObject.GetComponent<SpriteRenderer>().size = new Vector2(m_fHealth, 0.02f);
+
+        //
+        if (m_fHealth <= 0)
+        {
+            //
+            m_tHealthBar.gameObject.GetComponent<SpriteRenderer>().size = new Vector2(0, 0);
+            m_fHealthBarBack.SetActive(false);
+
+            //
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+            // set the open chest image
+            gameObject.GetComponent<SpriteRenderer>().sprite = m_sOpenImage;
+
+            //
+            m_bHoldInteraction = false;
         }
     }
 
@@ -135,5 +162,18 @@ public class Chest : Interactable
 
         // open the chest
         OpenCloseInventory();
+    }
+
+    //--------------------------------------------------------------------------------------
+    // OnCollisionEnter2D: When this object collides with another object call this function.
+    //
+    // Param:
+    //      cObject: a Collision2D for what object has had a collision.
+    //--------------------------------------------------------------------------------------
+    private void OnCollisionEnter2D(Collision2D cObject)
+    {
+        //
+        if (cObject.collider.tag == "Pistol Bullet")
+            m_fHealth -= 0.01f;
     }
 }
