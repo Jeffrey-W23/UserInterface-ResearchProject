@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: The main logic for the chest interactable object.
+// Purpose: The main logic for the enemy interactable object.
 //
-// Description: This script is used for opening and closing the chest on interaction.
+// Description: This script is used for the main logic of the enemy as well as opening 
+// and closing the enemy inventory on interaction.
 //
 // Author: Thomas Wiltshire
 //--------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
-// Chest object. Inheriting from Interactable.
+// Enemy object. Inheriting from Interactable.
 //--------------------------------------------------------------------------------------
 public class Enemy : Interactable
 {
@@ -23,8 +24,7 @@ public class Enemy : Interactable
     [Header("Inventory Settings:")]
 
     // public int for the inventory size
-    [LabelOverride("Size")]
-    [Tooltip("The size of the Inventory in the chest object.")]
+    [LabelOverride("Size")] [Tooltip("The size of the Inventory in the chest object.")]
     public int m_nInventorySize = 6;
 
     // Leave a space in the inspector.
@@ -37,13 +37,11 @@ public class Enemy : Interactable
     [Header("Sprite Settings:")]
 
     //
-    [LabelOverride("Chest Open Image")]
-    [Tooltip("The image to set the chest object sprite when the chest is open.")]
+    [LabelOverride("Chest Open Image")] [Tooltip("The image to set the chest object sprite when the chest is open.")]
     public Sprite m_sOpenImage;
 
     //
-    [LabelOverride("Chest Closed Image")]
-    [Tooltip("The image to set the chest object sprite when the chest is closed.")]
+    [LabelOverride("Chest Closed Image")] [Tooltip("The image to set the chest object sprite when the chest is closed.")]
     public Sprite m_sClosedImage;
 
     // Leave a space in the inspector.
@@ -67,7 +65,6 @@ public class Enemy : Interactable
     // an array to add some items to the inventory
     public Item[] itemsToAdd;
     public GameObject ItemText1;
-    //public GameObject ItemText2;
     public float m_fTimer = 0;
     public float m_fHealth = 8;
     // REMOVE // TEMP // REMOVE // POSSIBLTY //
@@ -129,19 +126,18 @@ public class Enemy : Interactable
         {
             // diabled item obtained text
             ItemText1.GetComponent<Text>().enabled = false;
-            //ItemText2.GetComponent<Text>().enabled = false;
         }
 
-        //
+        // if the health is below 0
         if (m_fHealth <= 0)
         {
-            //
+            // set the box collider to false
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
             // set the open chest image
             gameObject.GetComponent<SpriteRenderer>().sprite = m_sOpenImage;
 
-            //
+            // stop interaction
             m_bHoldInteraction = false;
         }
     }
@@ -169,10 +165,10 @@ public class Enemy : Interactable
             m_oInventory.GetStackInSlot(i).SetStack(new ItemStack());
         }
 
-        //
+        // if the text is enabled
         if (ItemText1.GetComponent<Text>().enabled == false)
         {
-            //
+            // set the item obtained text to chest is empty
             ItemText1.GetComponent<Text>().text = "The chest is empty.";
             ItemText1.GetComponent<Text>().enabled = true;
         }
@@ -202,7 +198,7 @@ public class Enemy : Interactable
     //--------------------------------------------------------------------------------------
     private void OnCollisionEnter2D(Collision2D cObject)
     {
-        //
+        // if a bullet collides with the enemy
         if (cObject.collider.tag == "Pistol Bullet")
             m_fHealth -= 1;
     }

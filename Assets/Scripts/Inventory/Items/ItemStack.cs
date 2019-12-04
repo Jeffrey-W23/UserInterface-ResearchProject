@@ -30,7 +30,7 @@ public class ItemStack
     // public int for the slot if of this item stack
     public int m_nSlotId;
 
-    //
+    // public bool for if the item stack is equipped or not
     public bool m_bEquipped;
 
     //--------------------------------------------------------------------------------------
@@ -265,21 +265,15 @@ public class ItemStack
         m_nItemCount -= nAmount;
     }
 
-
-
-
-
-
-
     //--------------------------------------------------------------------------------------
-    // EquipItemStack: 
+    // EquipItemStack: Equipped an item in an item stack.
     //
     // Param:
-    //      bStatus: 
+    //      bStatus: bool for the status to set.
     //--------------------------------------------------------------------------------------
     public void EquipItemStack(bool bStatus)
     {
-        // 
+        // set the item stack status to equip
         m_bEquipped = bStatus;
     }
 }

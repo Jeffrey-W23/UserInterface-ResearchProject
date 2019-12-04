@@ -117,16 +117,16 @@ public class Player : MonoBehaviour
     // an array to add some items to the inventory
     public Item[] itemsToAdd;
 
-    //
+    // public bool for which demo the player script is using
     public bool m_bSimpleDemo = false;
 
-    //
+    // public gameobject for the gun equipped display
     public GameObject m_gGunDisplay;
 
-    //
+    // public gameobject for the fist equipped dsiplay
     public GameObject m_gFistDisplay;
 
-    //
+    // public inventory for the armour section of the inventory
     public Inventory m_oArmourInventory;
     // REMOVE // TEMP // REMOVE // POSSIBLTY //
 
@@ -152,7 +152,6 @@ public class Player : MonoBehaviour
         m_gPistol = Instantiate(m_gWeaponPrefab);
         m_gPistol.transform.parent = m_gArm.transform;
         m_gPistol.SetActive(false);
-
         m_oArmourInventory = new Inventory(2);
         // REMOVE // TEMP // REMOVE // POSSIBLTY //
     }
@@ -193,7 +192,7 @@ public class Player : MonoBehaviour
         // Open and close the inventory system
         OpenCloseInventory();
 
-        //
+        // if the demo is not the simple demo
         if (!m_bSimpleDemo)
         {
             // make sure the hotbar selector isnt null and the current selected item isnt null
@@ -202,11 +201,15 @@ public class Player : MonoBehaviour
                 // if the hotbar selector has the gun pistol currently selected turn the object on and off
                 if (FindObjectOfType<HotbarSelector>().GetCurrentlySelectedItemStack().GetItem().m_strTitle == "Pistol")
                 {
+                    // set the gun to active and set the crosshair
                     m_gPistol.SetActive(true);
                     CustomCursor.m_gInstance.SetCrosshair();
                 }
+
+                // else
                 else
                 {
+                    // set the gun to inactive and set cursor back to defualt
                     m_gPistol.SetActive(false);
                     CustomCursor.m_gInstance.SetDefaultCursor();
                 }
@@ -221,43 +224,39 @@ public class Player : MonoBehaviour
             }
         }
 
-        //
+        // else if the demo is simple
         else
         {
-            //
+            // loop through the player inventory
             for (int i = 0; i < m_oInventory.GetInventory().Count; i++)
             {
-                //
+                // if the item in the slot is not null 
                 if (m_oInventory.GetStackInSlot(i).GetItem() != null)
                 {
-                    //
+                    // if the inventory has a pistol
                     if (m_oInventory.GetStackInSlot(i).GetItem().m_strTitle == "Pistol")
                     { 
-                        //
+                        // if the 1 key is pressed
                         if (Input.GetKeyDown(KeyCode.Alpha1))
                         {
-                            //
+                            // set the gun to true
                             m_gPistol.SetActive(true);
-
-                            //
                             m_gGunDisplay.SetActive(true);
                             m_gFistDisplay.SetActive(false);
 
-                            //
+                            // change the cursor to the crosshair
                             CustomCursor.m_gInstance.SetCrosshair();
                         }
 
-                        //
+                        // if the key 2 is pressed
                         if (Input.GetKeyDown(KeyCode.Alpha2))
                         {
-                            //
+                            // set the gun to false
                             m_gPistol.SetActive(false);
-
-                            //
                             m_gGunDisplay.SetActive(false);
                             m_gFistDisplay.SetActive(true);
 
-                            //
+                            // change the cursor to the default
                             CustomCursor.m_gInstance.SetDefaultCursor();
                         }
                     }

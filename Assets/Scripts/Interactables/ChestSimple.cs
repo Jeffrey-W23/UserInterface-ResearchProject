@@ -149,10 +149,10 @@ public class ChestSimple : Interactable
             m_oInventory.GetStackInSlot(i).SetStack(new ItemStack());
         }
 
-        //
+        // if the item text 1 is false
         if (ItemText1.GetComponent<Text>().enabled == false)
         {
-            //
+            // set the text to the chest being empty
             ItemText1.GetComponent<Text>().text = "The chest is empty.";
             ItemText1.GetComponent<Text>().enabled = true;
         }

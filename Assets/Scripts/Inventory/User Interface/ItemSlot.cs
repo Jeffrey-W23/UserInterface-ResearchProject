@@ -388,50 +388,35 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //--------------------------------------------------------------------------------------
-    // OnRightClick: 
+    // OnMiddleClick: What the item slot will do on a middle mouse click.
     //
     // Param:
-    //      oCurrentSelectedStack:
-    //      oCurrentStackCopy: 
+    //      oCurrentSelectedStack: an ItemStack of the current stack.
+    //      oCurrentStackCopy: and ItemStack of the copy of the item stack.
     //--------------------------------------------------------------------------------------
     private void OnMiddleClick(ItemStack oCurrentSelectedStack, ItemStack oCurrentStackCopy)
     {
         // if the current stack is not empty and the selected stack is empty
         if (!m_oCurrentStack.IsStackEmpty() && oCurrentSelectedStack.IsStackEmpty())
         {
-            //
+            // if the current item is a helmet or chestplate
             if (m_oCurrentStack.m_oItem.m_strTitle == "Helmet" || m_oCurrentStack.m_oItem.m_strTitle == "Chestplate")
             {
-                //
+                // if the item isnt equipped
                 if (!m_oCurrentStack.m_bEquipped)
                 {
-                    //
+                    // set the equipped to true
                     m_oCurrentStack.m_bEquipped = true;
 
                     // set the contentto the copy of the current stack.
                     SetSlotContent(oCurrentStackCopy);
                 }
 
-                //
+                // else if the item is equipped
                 else
                 {
-                    //
+                    // set the current stack to unequipped
                     m_oCurrentStack.m_bEquipped = false;
 
                     // set the contentto the copy of the current stack.
